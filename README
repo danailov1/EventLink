@@ -1,0 +1,35 @@
+/eventlink/
+├── index.html
+├── favicon.ico (optional)
+├── assets/
+│   ├── css/
+│   │   ├── main.css
+│   │   ├── navbar.css
+│   │   ├── forms.css
+│   │   └── events.css
+│   ├── img/
+│   │   └── default-avatar.png
+│   └── js/
+│       ├── app.js
+│       ├── config/
+│       │   └── firebaseConfig.js
+│       ├── services/
+│       │   ├── authService.js
+│       │   ├── userService.js
+│       │   ├── eventService.js
+│       │   └── recommendationService.js
+│       ├── ui/
+│       │   ├── renderEvents.js
+│       │   ├── renderProfile.js
+│       │   ├── formHandlers.js
+│       │   └── navbar.js
+│       └── utils/
+│           ├── validation.js
+│           ├── base64.js
+│           └── filters.js
+└── pages/
+    ├── login.html
+    ├── register.html
+    ├── profile.html
+    ├── events.html
+    └── recommendations.html

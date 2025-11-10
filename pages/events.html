@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EventLink - Events</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/navbar.css">
+  <link rel="stylesheet" href="../assets/css/forms.css">
+  <link rel="stylesheet" href="../assets/css/events.css">
+</head>
+<body>
+  <nav id="navbar"></nav>
+  <main>
+    <h1>Browse & Create Events</h1>
+    <div class="form-container">
+      <form id="create-event-form" style="display: none;">
+        <div class="field">
+          <label for="title">Event Title</label>
+          <input type="text" id="title" placeholder="e.g. Summer Music Festival" required>
+        </div>
+        <div class="field">
+          <label for="description">Description</label>
+          <textarea id="description" rows="4" placeholder="Tell us about the event..." required></textarea>
+        </div>
+        <div class="field">
+          <label for="category">Category</label>
+          <select id="category" required>
+            <option value="">Select a category</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="image">Event Image <span class="optional">(optional)</span></label>
+          <input type="file" id="image" accept="image/*">
+        </div>
+        <div id="image-preview"></div>
+        <button type="submit">Create Event</button>
+      </form>
+    </div>
+    <div class="filters">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="event-search" placeholder="      Search by title, description, or category...">
+      </div>
+      <select id="category-filter">
+        <option value="">All Categories</option>
+      </select>
+      <button id="clear-filters" class="btn secondary">Clear</button>
+    </div>
+    <div id="events-list"></div>
+    <p id="error-message" class="error-message"></p>
+  </main>
+  <script type="module" src="../assets/js/app.js"></script>
+</body>
+</html>
