@@ -1,2 +1,0 @@
-/event/*    /index.html    200!   # Catch-all for events, but exclude existing files
-/assets/*   /assets/*       200    # Ensure JS/CSS serve directly (no rewrite)

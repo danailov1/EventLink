@@ -1,0 +1,12 @@
+/event/*    /index.html    200!   # Catch-all for events, but exclude existing files
+/assets/*   /assets/*       200    # Ensure JS/CSS serve directly (no rewrite)[[redirects]]
+  from = "/event/*"
+  to = "/index.html"
+  status = 200
+  force = false  # Only rewrite if file doesn't exist (protects JS/CSS)
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false  # Global SPA fallback (optional, for any other routes like /pages/*)
