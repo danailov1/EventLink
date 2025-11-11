@@ -13,6 +13,7 @@ import { CATEGORIES, getCategoryLabel } from "/assets/js/config/categories.js";
 async function initApp() {
   renderNavbar();
 
+  await maybeOpenEventFromUrl();
   // Page-specific handlers
   handleRegisterForm();
   handleLoginForm();
@@ -170,6 +171,54 @@ async function initApp() {
       document.getElementById('error-message').textContent = 'Something went wrong—please try again.';
     }
   });
+}
+
+async function maybeOpenEventFromUrl() {
+  const match = location.pathname.match(/^\/event\/([a-zA-Z0-9]+)$/);
+  if (!match) return;
+
+  const eventId = match[1];
+
+  try {
+    const { getDoc, doc } = await import("https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js");
+    const { db } = await import("/assets/js/config/firebaseConfig.js");
+    const snap = await getDoc(doc(db, "events", eventId));
+
+    if (!snap.exists()) {
+      alert("Event not found.");
+      history.replaceState(null, "", "/");
+      return;
+    }
+
+    const event = { id: snap.id, ...snap.data() };
+
+    // Create a temporary container just for this modal
+    const container = document.createElement("div");
+    container.id = "url-event-container";
+    document.body.appendChild(container);
+
+    // Render single event → card click opens modal
+    const { renderEvents } = await import("/assets/js/ui/renderEvents.js");
+    renderEvents([event], "url-event-container");
+
+    // Auto-click the card to open modal
+    requestAnimationFrame(() => {
+      const card = container.querySelector('.event-card');
+      card?.click();
+    });
+
+    // Optional: clean up container when modal closes
+    window.addEventListener('popstate', () => {
+      if (document.body.contains(container)) {
+        document.body.removeChild(container);
+      }
+    }, { once: true });
+
+  } catch (err) {
+    console.error("Failed to load event from URL:", err);
+    alert("Could not load event.");
+    history.replaceState(null, "", "/");
+  }
 }
 
 document.addEventListener("DOMContentLoaded", initApp);

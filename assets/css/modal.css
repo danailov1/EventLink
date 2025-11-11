@@ -241,6 +241,199 @@
   }
 }
 
+/* Share Modal Styles */
+.share-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.share-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.share-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.share-content {
+  position: relative;
+  width: 90%;
+  max-width: 500px;
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  box-shadow: var(--shadow-xl);
+  animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10001;
+}
+
+.share-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--gray-100);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+}
+
+.share-close:hover {
+  background: var(--gray-200);
+  transform: rotate(90deg);
+}
+
+.share-close i {
+  font-size: 1rem;
+  color: var(--dark);
+}
+
+.share-content h3 {
+  margin: 0 0 8px;
+  font-size: 1.5rem;
+  color: var(--dark);
+  text-align: center;
+}
+
+.share-description {
+  text-align: center;
+  color: var(--dark-secondary);
+  margin-bottom: 32px;
+  font-size: 0.95rem;
+}
+
+.share-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.share-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px 16px;
+  border-radius: var(--radius);
+  border: 2px solid var(--gray-200);
+  background: var(--white);
+  color: var(--dark);
+  text-decoration: none;
+  transition: var(--transition);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.share-option:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+.share-option i {
+  font-size: 1.5rem;
+}
+
+.share-option.twitter {
+  border-color: #1DA1F2;
+}
+
+.share-option.twitter:hover {
+  background: #1DA1F2;
+  color: white;
+}
+
+.share-option.facebook {
+  border-color: #4267B2;
+}
+
+.share-option.facebook:hover {
+  background: #4267B2;
+  color: white;
+}
+
+.share-option.linkedin {
+  border-color: #0077B5;
+}
+
+.share-option.linkedin:hover {
+  background: #0077B5;
+  color: white;
+}
+
+.share-option.whatsapp {
+  border-color: #25D366;
+}
+
+.share-option.whatsapp:hover {
+  background: #25D366;
+  color: white;
+}
+
+.share-option.email {
+  border-color: var(--dark-secondary);
+}
+
+.share-option.email:hover {
+  background: var(--dark);
+  color: white;
+}
+
+.share-option.copy-link {
+  border-color: var(--primary);
+}
+
+.share-option.copy-link:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.share-option.copied {
+  background: var(--success);
+  border-color: var(--success);
+  color: white;
+}
+
+/* Responsive Share Modal */
+@media (max-width: 640px) {
+  .share-content {
+    padding: 32px 24px;
+  }
+  
+  .share-options {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .share-option {
+    padding: 16px 12px;
+  }
+}
+
 /* Modal Footer */
 .modal-footer {
   padding-top: 20px;
