@@ -96,7 +96,6 @@ export function openEventModal(event, isRecommendations = false) {
           </button>
         </div>
         <div class="modal-footer">
-          <p class="modal-note">More features coming soon: RSVP, comments, and event details!</p>
         </div>
       </div>
     </div>
