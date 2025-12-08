@@ -63,12 +63,124 @@ async function initApp() {
                 <a href="pages/login.html" class="btn secondary">Log In</a>
               </div>
             </div>
-            <h2>Featured Events</h2>
-            <div id="featured-events"></div>
+
+            <!-- Features Section -->
+            <section class="features">
+              <h2>What is EventLink?</h2>
+              <div class="features-grid">
+                <div class="feature-card">
+<i class="material-icons feature-icon">gps_fixed</i>
+                  <h3>Personalized Events</h3>
+                  <p>Get event recommendations tailored to your interests. The more you tell us about yourself, the better our suggestions become.</p>
+                </div>
+                <div class="feature-card">
+                  <i class="material-icons feature-icon">search</i>
+                  <h3>Smart Discovery</h3>
+                  <p>Browse and search through events by category, location, and interests. Find exactly what you're looking for or discover something new.</p>
+                </div>
+                <div class="feature-card">
+                  <i class="material-icons feature-icon">group</i>
+                  <h3>Community Events</h3>
+                  <p>Connect with others who share your passions. From concerts and conferences to meetups and workshops—find your people.</p>
+                </div>
+              </div>
+            </section>
+
+            <!-- How It Works Section -->
+            <section class="how-it-works">
+              <h2>How It Works</h2>
+              <div class="steps-container">
+                <div class="step">
+                  <div class="step-number">1</div>
+                  <h3>Create Your Account</h3>
+                  <p>Sign up in seconds with just your email. Set up your profile and tell us about your interests.</p>
+                </div>
+                <div class="step">
+                  <div class="step-number">2</div>
+                  <h3>Discover Events</h3>
+                  <p>Browse events curated for your interests or search for specific types of events you love.</p>
+                </div>
+                <div class="step">
+                  <div class="step-number">3</div>
+                  <h3>Get Recommendations</h3>
+                  <p>Our AI-powered recommendation engine suggests events that match your preferences perfectly.</p>
+                </div>
+                <div class="step">
+                  <div class="step-number">4</div>
+                  <h3>Share & Connect</h3>
+                  <p>Create events, invite friends, and build your community. Share your passions with others!</p>
+                </div>
+              </div>
+            </section>
+
+            <!-- Why Choose EventLink Section -->
+            <section class="why-choose">
+              <h2>Why Choose EventLink?</h2>
+              <div class="benefits-list">
+                <div class="benefit-item">
+                  <i class="material-icons benefit-icon">flash_on</i>
+                  <div class="benefit-content">
+                    <h3>Smart Recommendations</h3>
+                    <p>Our algorithm learns your preferences to suggest events you'll actually enjoy.</p>
+                  </div>
+                </div>
+                <div class="benefit-item">
+                  <i class="material-icons benefit-icon">palette</i>
+                  <div class="benefit-content">
+                    <h3>Beautiful & Intuitive</h3>
+                    <p>A sleek, modern interface that makes discovering events fun and easy.</p>
+                  </div>
+                </div>
+                <div class="benefit-item">
+                  <i class="material-icons benefit-icon">lock</i>
+                  <div class="benefit-content">
+                    <h3>Your Privacy Matters</h3>
+                    <p>We respect your data and never share your information without permission.</p>
+                  </div>
+                </div>
+                <div class="benefit-item">
+                  <i class="material-icons benefit-icon">smartphone</i>
+                  <div class="benefit-content">
+                    <h3>Mobile Friendly</h3>
+                    <p>Browse events on the go. EventLink works seamlessly on all devices.</p>
+                  </div>
+                </div>
+                <div class="benefit-item">
+                  <i class="material-icons benefit-icon">star</i>
+                  <div class="benefit-content">
+                    <h3>Create & Share</h3>
+                    <p>Organize your own events and build communities around shared interests.</p>
+                  </div>
+                </div>
+                <div class="benefit-item">
+                  <i class="material-icons benefit-icon">rocket_launch</i>
+                  <div class="benefit-content">
+                    <h3>Always Free</h3>
+                    <p>Access all core features at no cost. Create and discover without limits.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Featured Events Section -->
+            <section class="featured-section">
+              <h2>Featured Events</h2>
+              <div id="featured-events"></div>
+            </section>
+
+            <!-- Final CTA Section -->
+            <section class="cta-section">
+              <h2>Ready to Find Your Next Event?</h2>
+              <p>Join thousands of people discovering events they love. Sign up today and get personalized recommendations.</p>
+              <div class="cta-buttons-large">
+                <a href="pages/register.html" class="btn primary">Create Free Account</a>
+                <a href="pages/login.html" class="btn secondary">Already Have an Account? Log In</a>
+              </div>
+            </section>
           `;
           renderEvents(featured, 'featured-events');
           if (!featured.length) {
-            document.getElementById('featured-events').innerHTML = '<p class="no-events">No events yet—create the first one!</p>';
+            document.getElementById('featured-events').innerHTML = '<p class="no-events">No events yet—check back soon or create the first one!</p>';
           }
         }
       } else if (path.includes('profile.html') && user) {
