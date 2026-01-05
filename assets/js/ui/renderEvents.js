@@ -1,6 +1,6 @@
 import { getCategoryLabel, getCategoryIcon } from "../config/categories.js";
 
-// Format date for display
+// Format date and time for display
 function formatEventDate(dateString) {
   if (!dateString) return '';
   
@@ -9,27 +9,36 @@ function formatEventDate(dateString) {
   const diffTime = date - now;
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   
-  // Format options
-  const options = { 
+  // Format date
+  const dateOptions = { 
     weekday: 'short', 
     year: 'numeric', 
     month: 'short', 
     day: 'numeric' 
   };
-  const formattedDate = date.toLocaleDateString('en-US', options);
+  const formattedDate = date.toLocaleDateString('en-US', dateOptions);
+  
+  // Format time
+  const timeOptions = {
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true
+  };
+  const formattedTime = date.toLocaleTimeString('en-US', timeOptions);
   
   // Add relative time if event is soon
+  let relativeText = '';
   if (diffDays === 0) {
-    return `${formattedDate} • Today`;
+    relativeText = ' • Today';
   } else if (diffDays === 1) {
-    return `${formattedDate} • Tomorrow`;
+    relativeText = ' • Tomorrow';
   } else if (diffDays > 0 && diffDays <= 7) {
-    return `${formattedDate} • In ${diffDays} days`;
+    relativeText = ` • In ${diffDays} days`;
   } else if (diffDays < 0) {
-    return `${formattedDate} • Past event`;
+    relativeText = ' • Past event';
   }
   
-  return formattedDate;
+  return `${formattedDate} at ${formattedTime}${relativeText}`;
 }
 
 export function renderEvents(events = [], containerId, isRecommendations = false) {
