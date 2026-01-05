@@ -1,4 +1,4 @@
-// assets/js/ui/formHandlers.js (with better image preview)
+// assets/js/ui/formHandlers.js (with date field)
 import { registerUser, loginUser, logoutUser } from "/assets/js/services/authService.js";
 import { createUserProfile, updateUserProfile, getUserProfile } from "/assets/js/services/userService.js";
 import { createEvent } from "/assets/js/services/eventService.js";
@@ -160,6 +160,7 @@ export function handleCreateEventForm(uid) {
     const title = document.getElementById('title').value.trim();
     const description = document.getElementById('description').value.trim();
     const category = document.getElementById('category').value;
+    const eventDate = document.getElementById('event-date').value;
     const imageFile = imageInput.files[0];
     
     if (!category) {
@@ -167,8 +168,20 @@ export function handleCreateEventForm(uid) {
       return;
     }
 
+    if (!eventDate) {
+      document.getElementById('error-message').textContent = 'Please select an event date';
+      return;
+    }
+
     try {
-      await createEvent({ title, description, category, imageFile, creator: uid });
+      await createEvent({ 
+        title, 
+        description, 
+        category, 
+        eventDate, 
+        imageFile, 
+        creator: uid 
+      });
       location.reload();
     } catch (error) {
       document.getElementById('error-message').textContent = error.message;

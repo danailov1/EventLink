@@ -1,6 +1,6 @@
 /eventlink/
 ├── index.html
-├── favicon.ico (optional)
+├── favicon.ico 
 ├── assets/
 │   ├── css/
 │   │   ├── main.css
@@ -12,7 +12,7 @@
 │   └── js/
 │       ├── app.js
 │       ├── config/
-│       │   └── firebaseConfig.js
+│       │   └── firebaseConfig.js 
 │       ├── services/
 │       │   ├── authService.js
 │       │   ├── userService.js

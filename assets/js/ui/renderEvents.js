@@ -1,5 +1,37 @@
 import { getCategoryLabel, getCategoryIcon } from "../config/categories.js";
 
+// Format date for display
+function formatEventDate(dateString) {
+  if (!dateString) return '';
+  
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffTime = date - now;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  // Format options
+  const options = { 
+    weekday: 'short', 
+    year: 'numeric', 
+    month: 'short', 
+    day: 'numeric' 
+  };
+  const formattedDate = date.toLocaleDateString('en-US', options);
+  
+  // Add relative time if event is soon
+  if (diffDays === 0) {
+    return `${formattedDate} • Today`;
+  } else if (diffDays === 1) {
+    return `${formattedDate} • Tomorrow`;
+  } else if (diffDays > 0 && diffDays <= 7) {
+    return `${formattedDate} • In ${diffDays} days`;
+  } else if (diffDays < 0) {
+    return `${formattedDate} • Past event`;
+  }
+  
+  return formattedDate;
+}
+
 export function renderEvents(events = [], containerId, isRecommendations = false) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -12,7 +44,7 @@ export function renderEvents(events = [], containerId, isRecommendations = false
   events.forEach(event => {
     const card = document.createElement('div');
     card.className = 'event-card';
-    card.dataset.eventId = event.id; // for URL-based opening
+    card.dataset.eventId = event.id;
 
     const matchBadge = isRecommendations && event.matchScore > 0
       ? `<div class="match-score">${event.matchScore.toFixed(1)} match</div>`
@@ -20,6 +52,7 @@ export function renderEvents(events = [], containerId, isRecommendations = false
 
     const categoryIcon = getCategoryIcon(event.category);
     const categoryLabel = getCategoryLabel(event.category);
+    const dateDisplay = event.eventDate ? `<div class="event-date"><i class="fas fa-calendar-alt"></i> ${formatEventDate(event.eventDate)}</div>` : '';
 
     const imageHtml = event.image
       ? `<div class="image-container">
@@ -35,11 +68,11 @@ export function renderEvents(events = [], containerId, isRecommendations = false
       <div class="content">
         <h3>${event.title}</h3>
         <p>${event.description}</p>
+        ${dateDisplay}
         <span class="category-tag">${categoryIcon} ${categoryLabel}</span>
       </div>
     `;
 
-    // Click → open modal + push clean URL
     card.addEventListener('click', () => {
       openEventModal(event, isRecommendations);
       history.pushState({ eventId: event.id }, '', `/event/${event.id}`);
@@ -55,6 +88,13 @@ export function openEventModal(event, isRecommendations = false) {
   const categoryLabel = getCategoryLabel(event.category);
   const matchBadge = isRecommendations && event.matchScore > 0
     ? `<div class="modal-match-score">${categoryIcon} ${event.matchScore.toFixed(1)} match with your interests</div>`
+    : '';
+
+  const dateDisplay = event.eventDate 
+    ? `<div class="modal-event-date">
+         <i class="fas fa-calendar-alt"></i>
+         <span>${formatEventDate(event.eventDate)}</span>
+       </div>`
     : '';
 
   const imageHtml = event.image
@@ -80,6 +120,7 @@ export function openEventModal(event, isRecommendations = false) {
         <div class="modal-category">
           <span class="category-tag">${categoryIcon} ${categoryLabel}</span>
         </div>
+        ${dateDisplay}
         <div class="modal-description">
           <h3>About this event</h3>
           <p>${event.description}</p>
@@ -113,7 +154,6 @@ export function openEventModal(event, isRecommendations = false) {
     setTimeout(() => {
       document.body.removeChild(modal);
       document.body.style.overflow = '';
-      // Go back if we came from a direct /event/ URL
       if (history.state?.eventId) {
         history.back();
       }
@@ -198,10 +238,11 @@ function getEventUrl(eventId) {
 async function shareEvent(event) {
   const categoryLabel = getCategoryLabel(event.category);
   const eventUrl = getEventUrl(event.id);
+  const dateInfo = event.eventDate ? `\n📅 ${formatEventDate(event.eventDate)}` : '';
 
   const shareData = {
     title: `${event.title} - EventLink`,
-    text: `Check out this ${categoryLabel} event: ${event.title}\n\n${event.description.substring(0, 100)}${event.description.length > 100 ? '...' : ''}`,
+    text: `Check out this ${categoryLabel} event: ${event.title}${dateInfo}\n\n${event.description.substring(0, 100)}${event.description.length > 100 ? '...' : ''}`,
     url: eventUrl
   };
 

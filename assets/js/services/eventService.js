@@ -15,10 +15,13 @@ import {
 import { imageToBase64 } from "../utilis/base64.js";
 
 export async function createEvent(eventData) {
+  // Handle image conversion if file exists
   if (eventData.imageFile) {
     eventData.image = await imageToBase64(eventData.imageFile);
-    delete eventData.imageFile;
   }
+  
+  // Remove imageFile property to avoid storing undefined in Firestore
+  delete eventData.imageFile;
   
   // Initialize hype fields
   eventData.hypeCount = 0;

@@ -1,4 +1,4 @@
-/* assets/css/events.css - Enhanced Event Display with Image Cropping */
+/* assets/css/events.css - Enhanced Event Display with Image Cropping & Date */
 #events-list,
 #recommendations-list,
 #featured-events,
@@ -89,6 +89,26 @@
   font-weight: 600;
 }
 
+/* Event Date Display */
+.event-date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--dark-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 8px 12px;
+  background: var(--gray-50);
+  border-radius: 8px;
+  border: 1px solid var(--gray-200);
+  margin-top: 4px;
+}
+
+.event-date i {
+  color: var(--primary);
+  font-size: 0.9rem;
+}
+
 .event-card .category-tag {
   display: inline-flex;
   align-items: center;
@@ -119,6 +139,31 @@
   backdrop-filter: blur(8px);
   z-index: 10;
   letter-spacing: 0.02em;
+}
+
+/* Modal Event Date */
+.modal-event-date {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--dark-secondary);
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 16px 0;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--gray-50), var(--gray-100));
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+}
+
+.modal-event-date i {
+  color: var(--primary);
+  font-size: 1.25rem;
+}
+
+.modal-event-date span {
+  color: var(--dark);
+  font-weight: 600;
 }
 
 /* Profile Styles */
@@ -272,6 +317,16 @@
     width: 120px;
     height: 120px;
   }
+
+  .event-date {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+
+  .modal-event-date {
+    font-size: 0.9rem;
+    padding: 12px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -293,6 +348,18 @@
   .avatar {
     width: 100px;
     height: 100px;
+  }
+
+  .event-date {
+    font-size: 0.75rem;
+    padding: 6px 8px;
+    gap: 6px;
+  }
+
+  .modal-event-date {
+    font-size: 0.85rem;
+    padding: 12px;
+    gap: 10px;
   }
 }
 
@@ -344,4 +411,24 @@
   color: var(--dark-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="time"],
+textarea,
+select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  transition: var(--transition-fast);
+  color: var(--dark);
+  background: var(--white);
+  font-family: inherit;
 }

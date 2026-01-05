@@ -35,6 +35,10 @@
           </select>
         </div>
         <div class="field">
+          <label for="event-date">Event Date & Time</label>
+          <input type="datetime-local" id="event-date" required>
+        </div>
+        <div class="field">
           <label for="image">Event Image <span class="optional">(optional)</span></label>
           <input type="file" id="image" accept="image/*">
         </div>
@@ -45,7 +49,7 @@
     <div class="filters">
       <div class="search-box">
         <i class="fas fa-search"></i>
-        <input type="text" id="event-search" placeholder="      Search by title, description, or category...">
+        <input type="text" id="event-search" placeholder="Search by title, description, or category...">
       </div>
       <select id="category-filter">
         <option value="">All Categories</option>
